@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project name='concordchurch.me' basedir='.'>
+	<!-- -->
+	<property file='build.properties' />
+	<property name='app.name' value='${ant.project.name}' />
+
+	<property name='src.dir' value='.' />
+	<property name='run.dir' value='${run.base}/${run.app.name}' />
+
+	<path id="build.classpath">
+		<fileset dir="${src.lib.dir}" includes="**/*.jar" />
+	</path>
+
+	<target name='staging'>
+		<property name="project.base" value="/home/ubuntu/.jenkins/jobs/concordchurch.me-staging/workspace"/>
+		<property name="server.ip" value="10.182.141.45"/>
+		<antcall target="init"/>
+		<antcall target="deploy"/>
+		<antcall target="deploy_external"/>
+		<antcall target="server-restart_external"/>
+	</target>
+	<target name='production'>
+		<property name="project.base" value="/home/ubuntu/.jenkins/jobs/concordchurch.me-prod/workspace"/>
+		<property name="server.ip" value="10.187.43.136"/>
+		<antcall target="init"/>
+		<antcall target="deploy"/>
+		<antcall target="deploy_external"/>
+		<antcall target="server-restart_external2"/>
+	</target>
+
+	<target name='init' description="ant init">
+		<tstamp>
+			<format property="init.time" pattern="yyyyMMdd-HHmmss" />
+		</tstamp>
+
+		<echo message="delete ${run.dir}/api" />
+		<delete dir='${run.dir}/api' quiet='true' failonerror='false' />
+
+		<echo message="delete ${run.dir}/app" />
+		<delete includeemptydirs="true" quiet='true' failonerror='false'>
+			<fileset dir="${run.dir}/app">  
+			    <include name="**"/>  
+			    <exclude name="**/bower_components/**"/>  
+			</fileset>  
+		</delete>
+
+		<echo message="delete ${run.dir}/config" />
+		<delete dir='${run.dir}/config' quiet='true' failonerror='false' />
+
+		<echo message="delete ${run.dir}/test" />
+		<delete dir='${run.dir}/test' quiet='true' failonerror='false' />
+	</target>
+
+	<target name='compile' description="compile grunt in ${src.dir}">
+	</target>
+
+	<target name='deploy' description="deploy target folder to server">
+		<echo message="deploy target folder to server" />
+		
+		<echo message="copy from ${project.base} to ${run.dir}" />
+		<copy todir="${run.dir}" includeemptydirs='true' overwrite="true" failonerror='false'>
+			<fileset dir='${project.base}'>
+				<exclude name="**/node_modules/**"/>
+				<exclude name="**/bower_components/**"/>
+			</fileset>
+		</copy>
+		
+		<!--
+		<exec executable="chmod">
+			<arg value="777" />
+			<arg value="${run.dir}/build.sh" />
+		</exec>
+		
+		<echo message="compile npm / bower with ${run.dir}/build.sh" />
+		<exec executable="${run.dir}/build.sh">
+			<arg value="compile" />
+		</exec>
+		-->
+	</target>
+	
+	<target name="server-stop">
+		<echo message="server-stop" />
+		<exec executable="${run.dir}/build.sh">
+			<arg value="stop" />
+		</exec>
+	</target>
+
+	<target name="server-start">
+		<echo message="server-start" />
+		<exec executable="${run.dir}/build.sh">
+			<arg value="start" />
+		</exec>
+	</target>
+
+	<target name="server-restart">
+		<echo message="server-restart" />
+		<exec executable="${run.dir}/build.sh">
+			<arg value="restart" />
+		</exec>
+	</target>
+
+	<target name='deploy_external' description="deploy tar file to server">
+		<!-- tar cvf -->
+		<echo message="make ${run.dir}/${app.name}.tar file from ${project.base}" />
+		<delete file="${run.tmpdir}/${app.name}.tar"/>
+		<tar destfile="${run.tmpdir}/${app.name}.tar" compression="gzip">
+			<fileset dir="${project.base}">  
+			    <exclude name="**/dist/**"/>
+			    <exclude name="**/logs/**"/>
+			    <exclude name="**/upload/**"/>
+			    <exclude name="**/node_modules/**"/>
+			    <exclude name="**/bower_components/**"/>
+			</fileset>
+		</tar>
+		
+		<!--ftp server="${server.ip}" remotedir="${run.base}"
+			userid="${server.id}" password="${server.pw}" newer="no" verbose="yes">
+			<fileset file="${run.dir}/${app.name}.tar"/>
+		</ftp-->
+		<!-- scp transfer -->
+		<echo message="scp -ri ${server.pem} ${run.tmpdir}/${app.name}.tar ${server.id}@${server.ip}:${run.base}" />
+		<!-- scp sending ${run.tmpdir}/${app.name}.tar to ${run.base} -->
+		<!-- scp -ri /mnt/data1/.pem/zooper.pem /mnt/data2/tmp/concordchurch.me.tar ubuntu@10.186.47.54:/mnt/data2  -->
+		<exec executable="scp">
+		    <arg value="-ri"/>
+		    <arg value="${server.pem}"/>
+		    <arg value="${run.tmpdir}/${app.name}.tar"/>
+		    <arg value="${server.id}@${server.ip}:${run.base}"/>
+		</exec>		
+
+		<echo message="telnet ${server.ip} with ${server.id}/${server.pw}" />
+		<telnet userid="${server.id}" password="${server.pw}"
+			server="${server.ip}" timeout="180">
+				<read>&gt;</read>
+			<write>cd ${run.base}</write>
+				<read>${run.base}></read>
+			<write>rm -Rf ${run.dir}_bak</write>
+				<read>${run.base}></read>
+			<!--write>cp -Rf ${run.dir} ${run.dir}_bak</write>
+				<read>${run.base}></read-->
+			<write>mkdir ${run.dir}_tmp</write>
+				<read>${run.base}></read>
+			<write>tar xvf ${run.base}/${app.name}.tar -C ${run.dir}_tmp</write>
+				<read>${run.base}></read>
+
+			<!--echo message="init run dir!!!!" /-->
+			<write>rm -Rf ${run.dir}/api</write>
+				<read>${run.base}></read>
+			<!--write>rm -Rf ${run.dir}/app</write>
+				<read>${run.base}></read-->
+			<write>rm -Rf ${run.dir}/config</write>
+				<read>${run.base}></read>
+			<write>rm -Rf ${run.dir}/helpers</write>
+				<read>${run.base}></read>
+			<write>rm -Rf ${run.dir}/sdkDocs</write>
+				<read>${run.base}></read>
+			<write>rm -Rf ${run.dir}/test</write>
+				<read>${run.base}></read>
+			<write>rm -Rf ${run.dir}/views</write>
+			
+			<!--echo message="copy resources from temp dir to run dir!!!!" /-->
+			<write>cp -Rf ${run.dir}_tmp/api ${run.dir}</write>
+				<read>${run.base}></read>
+			<write>cp -Rf ${run.dir}_tmp/app ${run.dir}</write>
+				<read>${run.base}></read>
+			<write>cp -Rf ${run.dir}_tmp/config ${run.dir}</write>
+				<read>${run.base}></read>
+			<write>cp -Rf ${run.dir}_tmp/helpers ${run.dir}</write>
+				<read>${run.base}></read>
+			<write>cp -Rf ${run.dir}_tmp/sdkDocs ${run.dir}</write>
+				<read>${run.base}></read>
+			<write>cp -Rf ${run.dir}_tmp/test ${run.dir}</write>
+				<read>${run.base}></read>
+			<write>cp -Rf ${run.dir}_tmp/views ${run.dir}</write>
+				<read>${run.base}></read>
+			<write>cp -f ${run.dir}_tmp/*.js ${run.dir}</write>
+				<read>${run.base}></read>
+			<write>cp -f ${run.dir}_tmp/*.sh ${run.dir}</write>
+				<read>${run.base}></read>
+			<write>cp -f ${run.dir}_tmp/*.xml ${run.dir}</write>
+				<read>${run.base}></read>
+			<write>cp -f ${run.dir}_tmp/*.properties ${run.dir}</write>
+				<read>${run.base}></read>
+			<write>cp -f ${run.dir}_tmp/*.json ${run.dir}</write>
+				<read>${run.base}></read>
+				
+			<!--echo message="remove working dir" /-->
+			<write>rm -Rf ${run.dir}_tmp</write>
+				<read>${run.base}></read>
+			<write>rm -Rf ${run.base}/${app.name}.tar</write>
+				<read>${run.base}></read>
+
+			<write>chmod 777 ${run.dir}/build.sh</write>
+				<read>${run.base}></read>
+			<write>npm install</write>
+				<read>${run.base}></read>
+			<write>bower install</write>
+				<read>${run.base}></read>
+		</telnet>
+	</target>
+	
+	<target name="server-restart_external">
+		<echo message="server-restart_external" />
+		
+		<echo message="telnet ${server.ip} with ${server.id}/${server.pw}" />
+		<telnet userid="${server.id}" password="${server.pw}"
+			server="${server.ip}" timeout="180">
+				<read>&gt;</read>
+			<write>cd ${run.base}/${app.name}</write>
+				<read>${run.base}/${app.name}></read>
+			<write>forever stop pop;rm ~/.forever/pop.log</write>
+				<read>${run.base}/${app.name}></read>
+			<write>sleep 3</write>
+				<read>${run.base}/${app.name}></read>
+			<write>forever --uid "pop" start -c "node --expose-gc --max-old-space-size=1024 --nouse-idle-notification" app.js</write>
+				<read>${run.base}/${app.name}></read>
+		</telnet>
+	</target>
+	
+	<target name="server-restart_external2">
+		<echo message="server-restart_external2" />
+		
+		<echo message="telnet ${server.ip} with ${server.id}/${server.pw}" />
+		<telnet userid="${server.id}" password="${server.pw}"
+			server="${server.ip}" timeout="180">
+				<read>&gt;</read>
+			<write>cd ${run.base}/${app.name}</write>
+				<read>${run.base}/${app.name}></read>
+			<write>forever stop pop;rm ~/.forever/pop.log</write>
+				<read>${run.base}/${app.name}></read>
+			<write>sleep 3</write>
+				<read>${run.base}/${app.name}></read>
+			<write>forever --uid "pop" start -c "node --expose-gc --max-old-space-size=1024 --nouse-idle-notification" app.js</write>
+				<read>${run.base}/${app.name}></read>
+			<write>sleep 5</write>
+				<read>${run.base}/${app.name}></read>
+			<write>forever stop me2;rm ~/.forever/me2.log</write>
+				<read>${run.base}/${app.name}></read>
+			<write>sleep 3</write>
+				<read>${run.base}/${app.name}></read>
+			<write>forever --uid "me2" start -c "node --expose-gc --max-old-space-size=1024 --nouse-idle-notification" app.js instance_no=100</write>
+				<read>${run.base}/${app.name}></read>
+			<write>sleep 10</write>
+				<read>${run.base}/${app.name}></read>
+		</telnet>
+	</target>
+
+</project>
