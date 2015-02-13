@@ -5,7 +5,7 @@ var rootPath = path.normalize(__dirname + '/../..');
 
 module.exports = {
 	root: rootPath,
-	port: process.env.PORT_POP || 3005, // 
+	port: process.env.PORT_POP || 3000, // 
 	db: process.env.MONGOHQ_URL,
 
 	// front-end application directory

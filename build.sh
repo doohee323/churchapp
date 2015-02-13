@@ -6,7 +6,7 @@ export NODE=forever
 export NODE_ENV=staging
 
 # for staging server
-export RUN_BASE=/mnt/data2/concordchurch.me
+export RUN_BASE=/home/ubuntu/concordchurch
 
 echo '1nd args : '$1
 
@@ -19,13 +19,13 @@ then
   #rm -rf node_modules
   npm install
   bower install
-  #grunt build
+  grunt build
 elif [ $1 == 'restart' ]
 then
   echo "2 : $NODE restart app.js"
-	forever stop pop;rm ~/.forever/pop.log
+	forever stop app;rm ~/.forever/app.log
 	sleep 3
-	forever --uid "pop" start -c "node --expose-gc --max-old-space-size=1024 --nouse-idle-notification" app.js
+	forever --uid "app" start -c "node --expose-gc --max-old-space-size=1024 --nouse-idle-notification" app.js
 else
 	echo 'else'
 fi

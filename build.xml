@@ -208,11 +208,11 @@
 				<read>&gt;</read>
 			<write>cd ${run.base}/${app.name}</write>
 				<read>${run.base}/${app.name}></read>
-			<write>forever stop pop;rm ~/.forever/pop.log</write>
+			<write>forever stop app;rm ~/.forever/app.log</write>
 				<read>${run.base}/${app.name}></read>
 			<write>sleep 3</write>
 				<read>${run.base}/${app.name}></read>
-			<write>forever --uid "pop" start -c "node --expose-gc --max-old-space-size=1024 --nouse-idle-notification" app.js</write>
+			<write>forever --uid "app" start -c "node --expose-gc --max-old-space-size=1024 --nouse-idle-notification" app.js</write>
 				<read>${run.base}/${app.name}></read>
 		</telnet>
 	</target>
@@ -226,19 +226,19 @@
 				<read>&gt;</read>
 			<write>cd ${run.base}/${app.name}</write>
 				<read>${run.base}/${app.name}></read>
-			<write>forever stop pop;rm ~/.forever/pop.log</write>
+			<write>forever stop app;rm ~/.forever/app.log</write>
 				<read>${run.base}/${app.name}></read>
 			<write>sleep 3</write>
 				<read>${run.base}/${app.name}></read>
-			<write>forever --uid "pop" start -c "node --expose-gc --max-old-space-size=1024 --nouse-idle-notification" app.js</write>
+			<write>forever --uid "app" start -c "node --expose-gc --max-old-space-size=1024 --nouse-idle-notification" app.js</write>
 				<read>${run.base}/${app.name}></read>
 			<write>sleep 5</write>
 				<read>${run.base}/${app.name}></read>
-			<write>forever stop me2;rm ~/.forever/me2.log</write>
+			<write>forever stop app2;rm ~/.forever/app2.log</write>
 				<read>${run.base}/${app.name}></read>
 			<write>sleep 3</write>
 				<read>${run.base}/${app.name}></read>
-			<write>forever --uid "me2" start -c "node --expose-gc --max-old-space-size=1024 --nouse-idle-notification" app.js instance_no=100</write>
+			<write>forever --uid "app2" start -c "node --expose-gc --max-old-space-size=1024 --nouse-idle-notification" app.js instance_no=100</write>
 				<read>${run.base}/${app.name}></read>
 			<write>sleep 10</write>
 				<read>${run.base}/${app.name}></read>
