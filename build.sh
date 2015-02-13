@@ -16,8 +16,6 @@ cd $RUN_BASE
 if [ $1 == 'compile' ]
 then
   echo "1 : npm / bower"
-  #rm -rf node_modules
-  npm install
   bower install
   grunt build
 elif [ $1 == 'restart' ]
@@ -30,6 +28,40 @@ else
 	echo 'else'
 fi
 
-
+  #rm -rf node_modules
+  #npm install
+	#npm install lru-cache
+	#npm install sigmund
+	#npm install autoprefixer
+	#npm install connect
+	#npm install clean-css
+	#npm install ansi-styles
+	#npm install fs-extra
+	#npm install hooker
+	#npm install async
+	#npm install ng-annotate
+	#npm install chalk
+  #npm install diff
+	#npm install connect-livereload
+	#npm install maxmin
+	#npm install strip-ansi
+	#npm install stat-mode
+	#npm install jshint
+	#npm install zlib-browserify
+	#npm install rimraf
+	#npm install each-async
+	#npm install open
+	#npm install has-color
+	#npm install ware
+	#npm install uglify-js
+	#npm install pretty-bytes
+	#npm install portscanner
+	#npm install html-minifier
+	#npm install imagemin-gifsicle
+	#npm install svgo
+	#npm install imagemin-jpegtran
+	#npm install imagemin-optipng
+	#npm install imagemin-pngquant
+	#npm install imagemin-svgo
 
 
