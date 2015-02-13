@@ -17,7 +17,7 @@ if [ $1 == 'compile' ]
 then
   echo "1 : npm / bower"
   bower install
-  grunt build
+  grunt build --force 
 elif [ $1 == 'restart' ]
 then
   echo "2 : $NODE restart app.js"
