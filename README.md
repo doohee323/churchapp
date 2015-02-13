@@ -38,6 +38,9 @@ http://52.0.156.206:3000
 	./build.sh compile
 
 ㅇ run
+	node app.js
+
+	you can run with forever
 	./build.sh restart
 
 	http://localhost:3000
