@@ -1,13 +1,15 @@
 killall node
 
-node-inspector --debug-port=5859 --web-port=4002 &
+node-inspector --web-port=4001 &
 
 sleep 3;
 
-node --debug app.js &
+#node --debug app.js &
 
-#node --debug=5859 --expose-gc --max-old-space-size=6000 $1 &
+node --debug --expose-gc --max-new-space-size=2048 --max-old-space-size=4096 app.js &
 
 sleep 3;
 
-open http://127.0.0.1:4002/debug?port=5859
+open http://localhost:3000
+
+open http://127.0.0.1:4001/debug?port=5858
