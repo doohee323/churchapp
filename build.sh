@@ -6,7 +6,7 @@ export NODE=forever
 export NODE_ENV=staging
 
 # for staging server
-export RUN_BASE=/home/ubuntu/concordchurch
+export RUN_BASE=/home/ubuntu/churchapp
 
 echo '1nd args : '$1
 
