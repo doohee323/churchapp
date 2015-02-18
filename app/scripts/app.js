@@ -50,7 +50,7 @@ angular
    * register $http interceptor factory
    */
   $httpProvider.interceptors.push('httpinterceptor');
-  	
+  
 }]);
 
 angular.module('concordchurchApp').factory('$exceptionHandler', function () {
@@ -71,6 +71,7 @@ angular.module('concordchurchApp').factory('$exceptionHandler', function () {
 	        date: moment().utc().toDate().format('YYYYMMDD HH:mm:ss:SS'),
 	        stack: exception.stack
 	      };
+	  	errorInfo.stack;
 	    $.ajax({
 	      type: "POST",
 	      url: "/loggingFromClient",
