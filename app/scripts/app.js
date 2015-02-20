@@ -10,6 +10,7 @@
  */
 
 var config = {
+	api_url:'http://192.168.1.5:3005'
 };
  
 angular
@@ -71,16 +72,15 @@ angular.module('concordchurchApp').factory('$exceptionHandler', function () {
 	        date: moment().utc().toDate().format('YYYYMMDD HH:mm:ss:SS'),
 	        stack: exception.stack
 	      };
-	  	errorInfo.stack;
+	  	console.log(errorInfo.stack);
 	    $.ajax({
 	      type: "POST",
-	      url: "/loggingFromClient",
+	      url: "http://192.168.1.5:3005/loggingFromClient",
 	      data: errorInfo
 	    }).done(function(data) {
 	  		console.log('sent error message to the server!' + JSON.stringify(errorInfo));
 	    }).fail(function(data) {
 	  		console.log('can\'t send error message to the server!' + data);
-	  		alert('can\'t send error message to the server!' + data);
 	    }).always(function(data) {
 			});   			    
   	}

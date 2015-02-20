@@ -735,11 +735,11 @@ var gf_CreateFaviconImgUrl = function ($http, image_url, site, cb) {
 }; 
 
 var gf_SetItem = function (key, value) {
-	localStorage.removeItem(key);
-	localStorage.setItem(key, JSON.stringify(value));
+	//localStorage.removeItem(key);
+	//localStorage.setItem(key, JSON.stringify(value));
 }; 
 var gf_GetItem = function (key, value) {
-	return JSON.parse(localStorage.getItem(key) || "{}");
+	//return JSON.parse(localStorage.getItem(key) || "{}");
 }; 
 
 var gf_LookupDs = function ( dataset, _keycolnm, id, cb ) {

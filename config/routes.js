@@ -4,5 +4,5 @@ module.exports = function(app, auth) {
 
     var words = require('../api/words');
     app.get('/bbs/:id', words.bbs);
-    app.get('/loggingFromClient', words.loggingFromClient);
+    app.post('/loggingFromClient', words.loggingFromClient);
 };

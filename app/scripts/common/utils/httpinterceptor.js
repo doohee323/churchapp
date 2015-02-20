@@ -16,12 +16,11 @@
 angular.module('locketAdminUtils',[])
   .factory('httpinterceptor', ['$q', '$rootScope', 'msgconst', 'config', function ($q, $rootScope, msgconst, config) {
 
-		var api_url;
     var started = function(req) {
       if(req) {
         $rootScope.running = true;
         if(!config.api_url) {
-	        api_url = document.location.origin;
+	        config.api_url = document.location.origin;
         }
       }
     };
@@ -37,11 +36,11 @@ angular.module('locketAdminUtils',[])
         started(req);
 				if(req.url.trim().endsWith('html')){
 				} else {
-					req.url = api_url + req.url;
+					req.url = config.api_url + req.url;
 		      req.headers = req.headers || {};
-		      if (localStorage.getItem('token') && localStorage.getItem('token') != "undefined") {
-		        req.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
-		      }
+		      //if (localStorage.getItem('token') && localStorage.getItem('token') != "undefined") {
+		      //  req.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+		      //}
 				}      
         return req || $q.when(req);
       },
@@ -71,7 +70,7 @@ angular.module('locketAdminUtils',[])
           if(response.req) {
 	          msg += "HTTP: " + response.req.method + " on " + response.req.url + " failed.";
           } else {
-	          msg += "HTTP: " + response.config.method + " on " + response.api_url + " failed.";
+	          msg += "HTTP: " + response.config.method + " on " + config.api_url + " failed.";
           }
         }
         console.error('[' + title + ', HTTP:' + status + '], message=' + msg);
