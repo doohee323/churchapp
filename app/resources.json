@@ -1,10 +1,9 @@
 {"domain":"http://192.168.1.17:3000",
-"forceYn":true,
-"resources":[{"resource":"/.htaccess", "cachelevel":"static", "version":"2014.02.16.1"},
+"forceYn":false,
+"resources":[
 {"resource":"/404.html", "cachelevel":"static", "version":"2014.02.16.1"},
 {"resource":"/favicon.ico", "cachelevel":"static", "version":"2014.02.16.1"},
 {"resource":"/index.html", "cachelevel":"static", "version":"2014.02.16.1"},
-{"resource":"/robots.txt", "cachelevel":"static", "version":"2014.02.16.1"},
 {"resource":"/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.eot", "cachelevel":"static", "version":"2014.02.16.1"},
 {"resource":"/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.svg", "cachelevel":"static", "version":"2014.02.16.1"},
 {"resource":"/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf", "cachelevel":"static", "version":"2014.02.16.1"},
