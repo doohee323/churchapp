@@ -1,0 +1,9 @@
+<div ng-controller="MainCtrl">
+    <ul rn-carousel rn-carousel-indicator="true" style="width:100%;height:500px">
+        <li class="video" ng-repeat="item in items">
+            <div style="background-image:url({{ item.media }});height:500px">{{ item.title }}</div>
+        </li>
+    </ul>
+</div>
+
+

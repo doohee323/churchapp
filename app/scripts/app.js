@@ -17,14 +17,12 @@ var config = {
  
 angular
   .module('concordchurchApp', [
-    'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize',
     'ngTouch',
     'ui.router',
-    'ngMaterial',
     'angular-carousel',
     'locketAdminUtils'
   ]).constant('config', config)
@@ -36,9 +34,13 @@ angular
 	//delete $httpProvider.defaults.headers.common['X-Requested-With'];
   
 	$stateProvider.state('index', {
-  		url: "",
+		url: "",
 		templateUrl: 'views/main.html',
 		controller: 'MainCtrl'
+	}).state('swipe', {
+		url: '/swipe',
+		templateUrl: 'views/swipe.html',
+		controller: 'SwipeCtrl'
 	}).state('words', {
 		url: '/words',
 		templateUrl: 'views/words.html',
