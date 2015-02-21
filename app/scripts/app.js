@@ -25,6 +25,7 @@ angular
     'ngTouch',
     'ui.router',
     'ngMaterial',
+    'angular-carousel',
     'locketAdminUtils'
   ]).constant('config', config)
 .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide',
