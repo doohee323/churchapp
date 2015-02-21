@@ -9,7 +9,7 @@
  */
 var bRun;
 angular.module('concordchurchApp')
-  .controller('WordsCtrl', function ($rootScope, $scope, $window, $stateParams, $state, $http, $location, $timeout, $mdBottomSheet, config, MeService) {
+  .controller('WordsCtrl', function ($rootScope, $scope, $window, $stateParams, $state, $http, $location, $timeout, config, MeService) {
 		$scope.$location = $location;
 		var id = $stateParams.id;
 		var currentRow = 0;
@@ -17,23 +17,9 @@ angular.module('concordchurchApp')
 		$scope.alert = '';
 		$scope.showListBottomSheet = function($event) {
 		  $scope.alert = '';
-		  $mdBottomSheet.show({
-		    templateUrl: 'views/bottom-sheet-list-template.html',
-		    controller: 'ListBottomSheetCtrl',
-		    targetEvent: $event
-		  }).then(function(clickedItem) {
-		    $scope.alert = clickedItem.name + ' clicked!';
-		  });
 		};	
 		$scope.showGridBottomSheet = function($event) {
 	    $scope.alert = '';
-	    $mdBottomSheet.show({
-	      templateUrl: 'views/bottom-sheet-grid-template.html',
-	      controller: 'GridBottomSheetCtrl',
-	      targetEvent: $event
-	    }).then(function(clickedItem) {
-	      $scope.alert = clickedItem.name + ' clicked!';
-	    });
 	  };	
 	
     $scope.retrieve = function(id) {
@@ -70,9 +56,9 @@ angular.module('concordchurchApp')
   $scope.googleUrl = 'http://google.com';    
 })
 
-.controller('ListBottomSheetCtrl', function($scope, config, $mdBottomSheet) {
+.controller('ListBottomSheetCtrl', function($scope, config) {
 })
-.controller('GridBottomSheetCtrl', function($scope, config, $mdBottomSheet) {
+.controller('GridBottomSheetCtrl', function($scope, config) {
   $scope.items = [
     { name: 'facebook', icon: 'facebook' },
     { name: 'twitter', icon: 'twitter' },
@@ -86,7 +72,6 @@ angular.module('concordchurchApp')
 //    if(clickedItem.name == 'facebook') {
     	$scope.sendSns(clickedItem.name);
 //    }
-    $mdBottomSheet.hide(clickedItem);
   };
   
 	$scope.sendSns = function(sns) {

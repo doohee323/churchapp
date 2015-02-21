@@ -35,12 +35,12 @@ angular
   
 	$stateProvider.state('index', {
 		url: "",
-		templateUrl: 'views/main.html',
-		controller: 'MainCtrl'
-	}).state('swipe', {
-		url: '/swipe',
 		templateUrl: 'views/swipe.html',
 		controller: 'SwipeCtrl'
+	}).state('swipe', {
+		url: '/main',
+		templateUrl: 'views/swipe.html',
+		controller: 'MainCtrl'
 	}).state('words', {
 		url: '/words',
 		templateUrl: 'views/words.html',
