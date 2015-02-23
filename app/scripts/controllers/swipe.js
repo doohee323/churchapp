@@ -1,27 +1,25 @@
 'use strict';
 
 angular.module('concordchurchApp')
-.controller('SwipeCtrl', function($scope, $http) {
-    $scope.items = [
-    {'title':'aaaaaaaaaaaaaaaaaaaa', 'media':'http://localhost:9000/images/0.jpg'},
-    {'title':'ccccccccccccccccccccc', 'media':'http://localhost:9000/images/1.jpg'},
-    {'title':'eeeeeeeeeeeeeeeeeeeee', 'media':'http://localhost:9000/images/2.jpg'},
-    {'title':'fffffffffffffffffffff', 'media':'http://localhost:9000/images/3.jpg'},
-    {'title':'ggggggggggggggggggggg', 'media':'http://localhost:9000/images/4.jpg'},
-    {'title':'hhhhhhhhhhhhhhhhhhhhh', 'media':'http://localhost:9000/images/5.jpg'}
-    ]
+.controller('SwipeCtrl', function($scope, $http, MeService) {
 
+		var currentRow = 0;
     $scope.retrieve = function(id) {
-    debugger;
 	    if(!id) {
 	    	id = currentRow + 1;
 	    } else {
 	    	currentRow = id;
 	    }
+	    
 			MeService.R.get({'id':id}, function(data) {
 				if(data.rows) {
-					$scope.words = data.rows;
-			    config.curitem = $scope.words[0];
+					if($scope.words) {
+						$scope.words = $scope.words.concat(data.rows);
+				    config.curitem = $scope.words[0];
+					} else {
+						$scope.words = data.rows;
+				    $scope.retrieve(2);
+					}
 				}
 			}, function(error) {
 		   $scope.words = [{"img":"http://ckbch.org/_data/ckbch/file/m2_1/thumb/470570","link":"http://ckbch.org/_chboard/bcast/audio.php?bo_table=m2_1&ty=v&wr_id=470570",
