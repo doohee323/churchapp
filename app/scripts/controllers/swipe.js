@@ -12,6 +12,7 @@ angular.module('concordchurchApp')
     ]
 
     $scope.retrieve = function(id) {
+    debugger;
 	    if(!id) {
 	    	id = currentRow + 1;
 	    } else {
