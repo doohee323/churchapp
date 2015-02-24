@@ -42,7 +42,18 @@
 #carousel_msg {
 	margin-top: 0px;
 	width:100%;
-	background-size: contain;
+	height:100%;
+	background-size: contain;  // cover
+}
+
+#center_align {
+	position: absolute;
+	z-index: 2;
+	height: 200px;
+	width: 100%;
+	padding-top: 10px; 
+	margin-left: 0px;
+	margin-right: 0px;
 }
 
 </style>
@@ -50,20 +61,30 @@
 <div ng-controller="MainCtrl" data-ng-init="retrieve( 1 )">
     <ul rn-carousel rn-carousel-indicator="true" id="carousel">
         <li ng-repeat="item in words">
-            <div style="background-image:url({{ item.img }});" id="carousel_msg">{{ item.title }}
+            <div style="background-image:url({{ item.img }});" id="carousel_msg">
+            	<p style='margin-top: 0px;margin-left: 10px;color:#ffffff'>{{ item.title }} </p>
 				<div id="container">
-					<div id="block">
-		            	<a href="#" class="myButton">B1</a>
-		            	<a href="#" class="myButton">B2</a>
-					</div>
-				<div>            
+					<div id="block">_</div>
+				<div>    
+				<div id="center_align">
+	            	<a href="#" class="myButton">B1</a>
+	            	<a href="#" class="myButton">B2</a>
+				<div>    
+				
             </div>
         </li>
     </ul>
 </div>
 
 
-
+<script>
+	var height = $(window).height();
+	var top1 = height - 150;
+	$("#center_align").css({
+	   "position" : "absolute",
+	   "top" : top1
+	});	
+</script>
 
 
 
