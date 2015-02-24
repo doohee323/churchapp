@@ -1,72 +1,13 @@
-<style>
-.myButton {
-	background-color:#44c767;
-	-moz-border-radius:28px;
-	-webkit-border-radius:28px;
-	border-radius:28px;
-	border:1px solid #18ab29;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:arial;
-	font-size:17px;
-	padding:16px 31px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #2f6627;
-}
-.myButton:hover {
-	background-color:#5cbf2a;
-}
-.myButton:active {
-	position:relative;
-	top:1px;
-}
-
-#container { 
-  height:100%; 
-  text-align:center; 
-}
-#block { 
-	margin:250px 0;
-}
-
-#carousel {
-	width:100%;
-	position: absolute;
-	top:0;
-	bottom: 0;
-	margin-top: 0px;
-	margin-bottom: 0px;
-}
-
-#carousel_msg {
-	margin-top: 0px;
-	width:100%;
-	height:100%;
-	background-size: contain;  // cover
-}
-
-#center_align {
-	position: absolute;
-	z-index: 2;
-	height: 200px;
-	width: 100%;
-	padding-top: 10px; 
-	margin-left: 0px;
-	margin-right: 0px;
-}
-
-</style>
 
 <div ng-controller="SwipeCtrl" data-ng-init="retrieve( 1 )">
-	<ul rn-carousel rn-carousel-indicator="true" id="carousel">
+	<ul rn-carousel rn-carousel-indicator="true" id="carousel1">
     <li ng-repeat="item in words">
-			<div style="background-image:url({{ item.img }});" id="carousel_msg">
+			<div style="background-image:url({{ item.img }});" id="carousel_msg1">
       	<p style='margin-top: 0px;margin-left: 10px;color:#ffffff'>{{ item.title }} </p>
-				<div id="container">
-					<div id="block">_</div>
+				<div id="container1">
+					<div id="block1">_</div>
 				<div>    
-				<div id="center_align">
+				<div id="center_align1">
 					<a ng-click="open(item);" class="myButton" style="width:130px">Video</a>
 					<a ng-click="sendSns('facebook')" class="myButton" style="width:130px">Facebook</a>
 				<div>    
@@ -75,13 +16,14 @@
   </ul>
 </div>
 
-<script>
+<script type="text/javascript">
 	var height = $(window).height();
 	var top1 = height - 150;
 	$("#center_align").css({
 	   "position" : "absolute",
 	   "top" : top1
-	});	
+	});
+	
 </script>
 
 
