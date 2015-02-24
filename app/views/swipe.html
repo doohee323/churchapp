@@ -27,29 +27,36 @@
   text-align:center; 
 }
 #block { 
-	margin:450px 0;
+	margin:250px 0;
 }
 
 #carousel {
-	width:100%;position: absolute;top: 0;bottom: 0;margin-top: 0px;margin-bottom: 0px;
+	width:100%;
+	position: absolute;
+	top:0;
+	bottom: 0;
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
 
 #carousel_msg {
-	width:100%;background-size: cover;
+	margin-top: 0px;
+	width:100%;
+	background-size: contain;
 }
 
 </style>
 
 <div ng-controller="MainCtrl" data-ng-init="retrieve( 1 )">
     <ul rn-carousel rn-carousel-indicator="true" id="carousel">
-        <li class="video" ng-repeat="item in words">
+        <li ng-repeat="item in words">
             <div style="background-image:url({{ item.img }});" id="carousel_msg">{{ item.title }}
-							<div id="container">
-								<div id="block">
+				<div id="container">
+					<div id="block">
 		            	<a href="#" class="myButton">B1</a>
 		            	<a href="#" class="myButton">B2</a>
-								</div>
-							<div>            
+					</div>
+				<div>            
             </div>
         </li>
     </ul>
