@@ -40,7 +40,7 @@ angular
 	}).state('swipe', {
 		url: '/main',
 		templateUrl: 'views/swipe.html',
-		controller: 'MainCtrl'
+		controller: 'SwipeCtrl'
 	}).state('words', {
 		url: '/words',
 		templateUrl: 'views/words.html',
