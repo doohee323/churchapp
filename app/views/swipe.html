@@ -1,5 +1,26 @@
 
-<div ng-controller="SwipeCtrl" data-ng-init="retrieve( 2 )">
+<div ng-controller="SwipeCtrl" data-ng-init="retrieve( 1 )">
+
+	<div style="position: absolute;left: 0px;">
+		<a ng-click="refresh()" title="next list" style="cursor: pointer;">
+			<img src="images/reload.png" style="width:64px;height:64px;margin-right:0px;">
+		</a>
+	</div>
+	<div style="margin-left: 64px;">
+		<ul id="nav">
+			<li style='width: 20%;'><a ui-sref="words">List</a></li>
+			<li style='width: 20%;'><a href="http://ckbch.org/_chboard/bbs/board.php?bo_table=m2_1">PC version</a></li>
+		</ul>
+	</div>
+	<div style="position: absolute;right: 0px;">
+		<a ng-click="prev()" title="next list" style="cursor: pointer;">
+			<img src="images/prev.png" style="margin-right:0px;">
+		</a>
+		<a ng-click="next()" title="next list" style="cursor: pointer;">
+			<img src="images/next.png" style="margin-right:0px;">
+		</a>
+	</div>
+
 	<ul rn-carousel rn-carousel-indicator="true" id="carousel1">
     <li ng-repeat="item in words">
 			<div style="background-image:url({{ item.img }});" id="carousel_msg1">
