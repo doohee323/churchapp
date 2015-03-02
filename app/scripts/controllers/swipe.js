@@ -5,7 +5,7 @@ angular.module('concordchurchApp')
 
   var prefix = "/api/bunch/v2/me/";
 	
-	var currentRow = 0;
+	var currentRow = 1;
   $scope.next = function(id) {
     if(!id) {
     	id = currentRow + 1;

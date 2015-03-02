@@ -13,7 +13,7 @@ angular.module('concordchurchApp')
 		$scope.$location = $location;
 		var id = $stateParams.id;
   	var prefix = "/api/bunch/v2/me/";
-		var currentRow = 0;
+		var currentRow = 1;
 		
 		$scope.alert = '';
 		$scope.showListBottomSheet = function($event) {

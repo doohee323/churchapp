@@ -1,14 +1,14 @@
 
 <div ng-controller="WordsCtrl" data-ng-init="retrieve( 1 )">
-  <!--md-toolbar class="md-theme-light" ng-click="showListBottomSheet($event)"-->
+
   <md-toolbar class="md-theme-light" style="background-color: #f2f2f2;">
     <h1 class="md-toolbar-tools">
-			<div style="position: absolute;left: 0px;">
-				<a ng-click="refresh()" title="next list" style="cursor: pointer;">
-					<img src="images/reload.png" style="width:64px;height:64px;margin-right:0px;">
+			<div style="position: absolute;left: 0px;width:35px;height:64px;cursor: pointer;">
+				<a ng-click="refresh()" title="next list">
+					<img src="images/reload.png" style="padding-top: 22px;padding-left: 8px;">
 				</a>
 			</div>
-			<div ng-click="showGridBottomSheet($event)" style="margin-left: 64px;">
+			<div ng-click="showGridBottomSheet($event)" style="margin-left: 35px;">
 	      <span>주일 말씀</span>
     	</div>
 			<div style="position: absolute;right: 0px;">
