@@ -9,7 +9,7 @@
  */
 var bRun;
 angular.module('concordchurchApp')
-  .controller('WordsCtrl', function ($rootScope, $scope, $window, $stateParams, $state, $http, $location, $timeout, config, MeService) {
+  .controller('WordsCtrl', function ($rootScope, $scope, $window, $stateParams, $state, $http, $location, $timeout, config, LogsService) {
 		$scope.$location = $location;
 		var id = $stateParams.id;
   	var prefix = "/api/bunch/v2/me/";
@@ -43,7 +43,8 @@ angular.module('concordchurchApp')
 			if(!id) {
 				id = currentRow;
 			}
-			MeService.R.get({'id':id}, function(data) {
+debugger;
+			LogsService.R.get({'id':id}, function(data) {
 				if(data.rows) {
 					$scope.words = data.rows;
 					localStorage.setItem(prefix + id, JSON.stringify($scope.words));
