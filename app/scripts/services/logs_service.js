@@ -2,10 +2,18 @@
 
 angular.module('concordchurchApp')
 .factory('LogsService', function ($resource, config) {
+	try {
 debugger;
-	if(Android) {
-		Android.cacheJson(JSON.stringify($scope.words));
-	} else {
+		if(Android != null && Android) {
+			var factory = {}; 
+			factory.R = {};
+	    factory.R.get = function(id, callback) {
+				var rslt = Android.getLogsByReadAt(id);
+				callback(JSON.parse(rslt));
+			}
+	    return factory;
+		}
+	} catch (e) {
 	  return {
 	    R: $resource("/bbs/:id", {
 	    	id:"@id"
