@@ -12,6 +12,7 @@
 {"resource":"/scripts/controllers/logs.js", "cachelevel":"static", "version":"2015-02-25 14:01:01.01"},
 {"resource":"/scripts/controllers/video.js", "cachelevel":"static", "version":"2015-02-25 14:01:01.01"},
 {"resource":"/scripts/services/logs_service.js", "cachelevel":"static", "version":"2015-02-25 14:01:01.01"},
+{"resource":"/scripts/services/swipe_service.js", "cachelevel":"static", "version":"2015-02-25 14:01:01.01"},
 {"resource":"/scripts/common/utils/httpinterceptor.js", "cachelevel":"static", "version":"2015-02-25 14:01:01.01"},
 {"resource":"/scripts/common/utils/msgconst.js", "cachelevel":"static", "version":"2015-02-25 14:01:01.01"},
 {"resource":"/scripts/common/utils/prototype.js", "cachelevel":"static", "version":"2015-02-25 14:01:01.01"},
