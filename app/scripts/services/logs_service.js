@@ -8,7 +8,7 @@ debugger;
 			var factory = {}; 
 			factory.R = {};
 	    factory.R.get = function(id, callback) {
-				var rslt = Android.getLogsByReadAt(id);
+				var rslt = Android.getLogsByReadAt(JSON.stringify(id));
 				callback(JSON.parse(rslt));
 			}
 	    return factory;
