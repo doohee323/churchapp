@@ -65,7 +65,7 @@ debugger;
 	
 	  $scope.retrieve = function(read_at) {
 			var datast = localStorage.getItem(prefix + read_at);
-			if(!datast) {
+			if(datast) {
 				$scope.logs = JSON.parse(datast);
 		    config.curitem = $scope.logs[0];
 			} else {
