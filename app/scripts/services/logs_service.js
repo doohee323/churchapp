@@ -8,8 +8,8 @@ angular.module('concordchurchApp')
 			factory.R = {};
 	    factory.R.get = function(id, callback) {
 				var rslt = {};
-				rslt.rows = Android.getLogsByReadAt(JSON.stringify(id));
-				callback(JSON.parse(rslt));
+				rslt.rows = JSON.parse(Android.getLogsByReadAt(JSON.stringify(id)));
+				callback(rslt);
 			}
 	    return factory;
 		}
