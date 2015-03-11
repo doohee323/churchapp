@@ -6,7 +6,7 @@ angular.module('concordchurchApp')
 		if(Android != null && Android) {
 			var factory = {}; 
 			factory.R = {};
-	    factory.R.get = function({}, callback) {
+	    factory.R.get = function(param, callback) {
 				var rslt = {};
 				rslt.rows = JSON.parse(Android.getResourceStatus(JSON.stringify({})));
 				callback(rslt);
