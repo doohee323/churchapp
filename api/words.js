@@ -20,7 +20,6 @@ var urlInfo;
  */
 exports.bbs = function(req, res) {
 	try {
-		logger.debug("req.url: " + req.url);
 		var input = utils.req(req);
 		var rUrl = 'http://ckbch.org/_chboard/bbs/board.php?bo_table=m2_' + input.id;
 		
@@ -192,6 +191,23 @@ exports.invite = function(req, res) {
 	} catch (e) {
 		logger.error(e);
 	}
+}
+
+/**
+ * get test
+ */
+exports.test = function(req, res) {
+		var input = utils.req(req);
+		logger.debug("req.url: " + req.url);
+		
+		var rslt = {};
+		if(input.id == 'NewYork') {
+			res.json({'temperature': '91'});
+		} else if(input.id == 'Washington') {
+			res.json({'temperature': '92'});
+		} else if(input.id == 'London') {
+			res.json({'temperature': '93'});
+		}
 }
 
 exports.loggingFromClient = function(req, res) {
